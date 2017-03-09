@@ -11,17 +11,17 @@ class Account
   
   def deposit(amount)
     @balance += amount
-    add_transaction(amount)
+    add_transaction(amount, :credit)
   end
   
   def withdraw(amount)
     @balance -= amount
-    add_transaction(amount)
+    add_transaction(amount, :debit)
   end
   
   private
   
-  def add_transaction(amount)
-    @transactions << @transaction_class.new(amount, @balance)
+  def add_transaction(amount, type)
+    @transactions << @transaction_class.new(amount, @balance, type)
   end
 end

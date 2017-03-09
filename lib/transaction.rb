@@ -2,14 +2,15 @@ require 'date'
 
 class Transaction
   
-  attr_reader :date, :amount, :balance_snapshot
+  attr_reader :date, :amount, :balance_snapshot, :type
   
   DATE_FORMAT = "%d/%m/%Y"
   
-  def initialize(amount, balance_snapshot)
+  def initialize(amount, balance_snapshot, type)
     @date = date_to_string(Date.today)
     @amount = amount
     @balance_snapshot = balance_snapshot
+    @type = type
   end
   
   private
