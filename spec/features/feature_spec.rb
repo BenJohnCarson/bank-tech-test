@@ -1,6 +1,10 @@
 describe "feature test" do
   subject(:account) { Account.new }
   
+  before do
+    Timecop.freeze(Time.local(2012, 01, 10, 0, 0))
+  end
+  
   describe "1st user story" do
     # As a customer
     # So I can see whats in my account
@@ -38,7 +42,8 @@ describe "feature test" do
     it "stores a date with each transaction" do
       account.deposit(100)
       transaction = account.transactions.pop
-      expect(transaction.date).to be_truthy # TODO Change this to a date, research time stubbing in tests
+      date = "10/01/2012"
+      expect(transaction.date).to eq date
     end
   end
   
@@ -47,10 +52,10 @@ describe "feature test" do
     # So I can see a history of my transactions
     # I'd like to be able to print out a statement
     it "prints out a statement showing transaction history" do
-      statement =  "date       || credit || debit   || balance\n"\
-                   "14/01/2012 ||        || 500.00  || 2500.00\n"\
-                   "13/01/2012 || 2000.00||         || 3000.00\n"\
-                   "10/01/2012 || 1000.00||         || 1000.00\n"
+      statement =  "date       || credit || debit  || balance\n"\
+                  "14/01/2012 ||        || 500.00 || 2500.00\n"\
+                  "13/01/2012 || 2000.00||        || 3000.00\n"\
+                  "10/01/2012 || 1000.00||        || 1000.00\n"
       account.deposit(1000)
       account.deposit(2000)
       account.withdraw(500)

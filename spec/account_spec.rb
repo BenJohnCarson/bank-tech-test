@@ -1,10 +1,20 @@
+require "account"
+
 describe Account do
   let(:transaction)       { double :transaction }
   let(:transaction_class) { double :transaction_class, new: transaction }
+  let(:printer)           { double :printer, print_statement: STATEMENT }
   
-  subject(:account) { described_class.new(transaction_class) }
+  subject(:account) { described_class.new(transaction_class, printer) }
   
-  it { is_expected.to respond_to(:print_statement) }
+  STATEMENT =  "date       || credit || debit   || balance\n"\
+                   "14/01/2012 ||        || 500.00  || 2500.00\n"\
+                   "13/01/2012 || 2000.00||         || 3000.00\n"\
+                   "10/01/2012 || 1000.00||         || 1000.00\n"
+  
+  it "can print a statement" do
+    expect(account.print_statement).to eq STATEMENT
+  end
   
   it "has a balance" do
     expect(account.balance).to eq 0

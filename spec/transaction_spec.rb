@@ -1,3 +1,5 @@
+require "transaction"
+
 describe Transaction do
   subject(:credit_transaction)  { described_class.new(100, 200, :credit) }
   subject(:debit_transaction)   { described_class.new(100, 200, :debit) }

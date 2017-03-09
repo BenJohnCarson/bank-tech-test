@@ -17,7 +17,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'account'
 require 'timecop'
 
 RSpec.configure do |config|
