@@ -1,5 +1,8 @@
 describe Account do
-  subject(:account) { described_class.new }
+  let(:transaction)       { double :transaction }
+  let(:transaction_class) { double :transaction_class, new: transaction }
+  
+  subject(:account) { described_class.new(transaction_class) }
   
   it "has a balance" do
     expect(account.balance).to eq 0
@@ -14,9 +17,22 @@ describe Account do
       expect(account.balance).to eq 100
     end
     
-    it "can withdraw funds" do
-      account.withdraw(50)
-      expect(account.balance).to eq 50
+    it "stores transactions on deposit" do
+      expect(account.transactions).to eq [transaction]
+    end
+    
+    context "50 has been withdrawn" do
+      before do
+        account.withdraw(50)
+      end
+      
+      it "can withdraw funds" do
+        expect(account.balance).to eq 50
+      end
+      
+      it "stores transactions on withdraw" do
+        expect(account.transactions).to eq [transaction, transaction]
+      end
     end
   end
 end
