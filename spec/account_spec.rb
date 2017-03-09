@@ -5,8 +5,18 @@ describe Account do
     expect(account.balance).to eq 0
   end
   
-  it "can deposit funds" do
-    account.deposit(100)
-    expect(account.balance).to eq 100
+  context "Account has 100 in funds" do
+    before do
+      account.deposit(100)
+    end
+    
+    it "can deposit funds" do
+      expect(account.balance).to eq 100
+    end
+    
+    it "can withdraw funds" do
+      account.withdraw(50)
+      expect(account.balance).to eq 50
+    end
   end
 end
