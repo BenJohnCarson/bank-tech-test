@@ -4,6 +4,8 @@ describe Account do
   
   subject(:account) { described_class.new(transaction_class) }
   
+  it { is_expected.to respond_to(:print_statement) }
+  
   it "has a balance" do
     expect(account.balance).to eq 0
   end

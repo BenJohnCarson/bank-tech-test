@@ -19,6 +19,9 @@ class Account
     add_transaction(amount, :debit)
   end
   
+  def print_statement
+  end
+  
   private
   
   def add_transaction(amount, type)
