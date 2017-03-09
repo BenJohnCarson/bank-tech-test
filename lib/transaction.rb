@@ -4,7 +4,15 @@ class Transaction
   
   attr_reader :date
   
+  DATE_FORMAT = "%d/%m/%Y"
+  
   def initialize
-    @date = Date.today.strftime("%d/%m/%Y")
+    @date = date_to_string(Date.today)
+  end
+  
+  private
+  
+  def date_to_string(date)
+    date.strftime(DATE_FORMAT)
   end
 end
